@@ -13,6 +13,6 @@ public class AppController {
 
     @GetMapping("/TP04/task2")
     public String task2() {
-        return "task2";
+        return "task2"; // source: check src/main/resources/templates/task2.html. this page is brought over as a template using thymeleaf
     }
 }
