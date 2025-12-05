@@ -1,4 +1,4 @@
-package cult.cheonma.cheonyeowoon;
+package corp.sky.nano;
 
 import org.springframework.web.bind.annotation.GetMapping;
 

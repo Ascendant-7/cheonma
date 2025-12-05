@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recent Updates</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="card main">
+      <div class="card-body">
+        <h2 class="card-title">Recent Updates</h2>
+
+        <div class="list-group">
+          <div
+            class="list-group-item d-flex align-items-start"
+            th:each="i : ${#numbers.sequence(0, 2)}"
+          >
+            <!-- Icon -->
+            <div
+              class="bg-primary rounded me-3"
+              style="width: 50px; height: 50px"
+            ></div>
+
+            <!-- Description -->
+            <div class="flex-grow-1">
+              <p class="fw-bold mb-1">@username</p>
+              <p class="mb-0">
+                Donec id elit, pellentesque vitae, consequat ac, varius non,
+                dolor. Morbi commodo, ipsum sed pharetra gravida, orci magna
+                rhoncus neque, id pulvinar odio lorem sit amet risus.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="d-block mt-3 text-end">All updates</a>
+      </div>
+    </div>
+  </body>
+</html>

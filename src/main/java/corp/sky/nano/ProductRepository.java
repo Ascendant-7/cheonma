@@ -1,4 +1,4 @@
-package cult.cheonma.cheonyeowoon;
+package corp.sky.nano;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

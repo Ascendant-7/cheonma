@@ -1,4 +1,4 @@
-package cult.cheonma.cheonyeowoon;
+package corp.sky.nano;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
