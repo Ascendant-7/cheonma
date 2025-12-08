@@ -1,23 +1,71 @@
-<form th:fragment="formFragment">
+<form
+  th:fragment="form"
+  th:action="@{/save-product}"
+  method="post"
+  th:object="${dto}"
+  enctype="multipart/form-data"
+>
+  <input type="hidden" th:field="*{id}" />
   <div class="mb-3">
-    <label for="exampleInputEmail" class="form-label">Email Address</label>
+    <label for="product-name" class="form-label">Name Product</label>
     <input
-      type="email"
+      type="text"
       class="form-control"
-      id="exampleInputEmail"
-      aria-describedby="emailHelp"
+      th:field="*{name}"
+      id="product-name"
     />
-    <div class="form-text" id="emailHelp">
-      We'll never share your email with anyone else.
+    <div
+      th:if="${#fields.hasErrors('name')}"
+      class="text-danger"
+      th:errors="*{name}"
+    >
+      Please enter a name
     </div>
   </div>
+
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" />
+    <label for="price" class="form-label">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      th:field="*{price}"
+      id="price"
+      step="0.01"
+    />
+    <div
+      th:if="${#fields.hasErrors('price')}"
+      class="text-danger"
+      th:errors="*{price}"
+    >
+      Please enter a price
+    </div>
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-    <label for="exampleCheck1" class="form-check-label">Check me out</label>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      th:field="*{description}"
+      id="description"
+      aria-describedby="description-help"
+    ></textarea>
+    <div
+      th:if="${#fields.hasErrors('description')}"
+      class="text-danger"
+      th:errors="*{description}"
+    ></div>
+  </div>
+
+  <div class="mb-3">
+    <label for="image" class="form-label">Image</label>
+    <input type="file" class="form-control" th:field="*{image}" id="image" />
+    <div
+      th:if="${#fields.hasErrors('image')}"
+      class="text-danger"
+      th:errors="*{image}"
+    >
+      Please input an image
+    </div>
   </div>
   <button class="btn btn-primary" type="submit">Submit</button>
 </form>
