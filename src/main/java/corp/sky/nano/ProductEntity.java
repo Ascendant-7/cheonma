@@ -5,10 +5,13 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import corp.sky.nano.user.UserEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +28,9 @@ public class ProductEntity {
     public LocalDateTime created_at;
     @UpdateTimestamp
     public LocalDateTime updated_at;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    public UserEntity user;
 
     public ProductEntity() {
     }

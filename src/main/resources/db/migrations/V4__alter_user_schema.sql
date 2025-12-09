@@ -1,0 +1,2 @@
+ALTER TABLE products ADD COLUMN user_id BIGINT NULL,
+ADD CONSTRAINT fk_product_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL;
