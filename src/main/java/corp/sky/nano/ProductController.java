@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -56,7 +57,10 @@ public class ProductController {
         try {
 
             Path imageFile = Path.of(pathUpload).resolve(filename);
-            Resource resource = new UrlResource(imageFile.toUri());
+            if (imageFile.toUri() == null) { // fixes @NotNull check
+                return ResponseEntity.badRequest().build();
+            }
+            Resource resource = new UrlResource(Objects.requireNonNull(imageFile.toUri(), "File URI cannot be null."));
 
             // Resource resource =
             if (resource.exists() || resource.isReadable())
@@ -71,7 +75,8 @@ public class ProductController {
     @GetMapping("/product/edit/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
 
-        ProductEntity product = repo.findById(id).orElseThrow(() -> new RuntimeException("Product not found."));
+        ProductEntity product = repo.findById(Objects.requireNonNull(id, "ID cannot be null"))
+                .orElseThrow(() -> new RuntimeException("Product not found."));
 
         model.addAttribute("title", "Update Product");
         model.addAttribute("path", "fragments/form");
@@ -140,7 +145,8 @@ public class ProductController {
 
     @PostMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id, Model model) {
-        ProductEntity product = repo.findById(id).orElseThrow(() -> new RuntimeException("Product not found."));
+        ProductEntity product = repo.findById(Objects.requireNonNull(id, "ID cannot be null"))
+                .orElseThrow(() -> new RuntimeException("Product not found."));
         if (product.image_path != null) {
             try {
                 Path file = Path.of(pathUpload, product.image_path.substring("/files".length()));
